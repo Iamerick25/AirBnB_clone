@@ -3,12 +3,17 @@
 Module for console
 """
 import cmd
+from models import storage
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """
     HBNBCommand console class
     """
     prompt = "(hbnb)"
+    __classes = {
+        "BaseModel"
+    }
 
     def do_quit(self, arg):
         """
@@ -27,7 +32,14 @@ class HBNBCommand(cmd.Cmd):
         """
         Creates a new instance of BaseModel.
         """
-        pass
+        argurment1 = parse(arg)
+        if len(argurmentl) == 0:
+            print("** class name missing **")
+        elif argurmentl[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print(eval(argurmentl[0])().id)
+            storage.save()
 
     def do_show(self, arg):
         """
