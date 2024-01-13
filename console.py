@@ -2,11 +2,18 @@
 """
 Module for console
 """
+
 import cmd
 import re
 from models import storage
 from models.base_model import BaseModel
 from shlex import split
+from models.user import User
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.city import City
 
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
@@ -31,7 +38,8 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb)"
     __classes = {
-        "BaseModel"
+        "BaseModel", "User", "State", "City", "Amenity",
+        "Place", "Review"
     }
 
     def do_quit(self, arg):
@@ -97,20 +105,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation of all instances based or not on
-        the class name.
+        Print the string representation of all instances or a specific class.
+        Usage: <User>.all()
+                <User>.show()
         """
-        argl = parse(arg)
-        if len(argl) > 0 and argl[0] not in HBNBCommand.__classes:
+        objects = storage.all()
+
+        commands = shlex.split(arg)
+
+        if len(commands) == 0:
+            for key, value in objects.items():
+                print(str(value))
+        elif commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
         else:
-            objl = []
-            for obj in storage.all().values():
-                if len(argl) > 0 and argl[0] == obj.__class__.__name__:
-                    objl.append(obj.__str__())
-                elif len(argl) == 0:
-                    objl.append(obj.__str__())
-            print(objl)
+            for key, value in objects.items():
+                if key.split('.')[0] == commands[0]:
+                    print(str(value))
 
     def do_update(self, arg):
         """
