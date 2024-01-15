@@ -61,3 +61,6 @@ class TestFileStorage_methods(unittest.TestCase):
     def test_all_with_arg(self):
         with self.assertRaises(TypeError):
             models.storage.all(None)
+
+if __name__ == "__main__":
+    unittest.main()
