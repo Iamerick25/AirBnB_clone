@@ -7,7 +7,7 @@ import models
 import unittest
 from datetime import datetime
 from time import sleep
-from models.User import User
+from models.user import User
 
 
 class TestUser_instantiation(unittest.TestCase):
@@ -43,45 +43,45 @@ class TestUser_instantiation(unittest.TestCase):
         self.assertEqual(str, type(User.last_name))
 
     def test_two_Users_unique_ids(self):
-        User_1 = User()
-        User_2 = User()
-        self.assertNotEqual(User_1.id, User_2.id)
+        user_1 = User()
+        user_2 = User()
+        self.assertNotEqual(user_1.id, user_2.id)
 
     def test_two_Users_different_created_at(self):
-        User_1 = User()
+        user_1 = User()
         sleep(0.05)
-        User_2 = User()
-        self.assertLess(User_1.created_at, User_2.created_at)
+        user_2 = User()
+        self.assertLess(user_1.created_at, user_2.created_at)
 
     def test_two_Users_different_updated_at(self):
-        User_1 = User()
+        user_1 = User()
         sleep(0.05)
-        User_2 = User()
-        self.assertLess(User_1.updated_at, User_2.updated_at)
+        user_2 = User()
+        self.assertLess(user_1.updated_at, user_2.updated_at)
 
     def test_str_representation(self):
         date_ = datetime.today()
         date_rep = repr(date_)
-        User_1 = User()
-        User_1.id = "777777"
-        User_1.created_at = User_1.updated_at = date_
-        User_1_str = User_1.__str__()
-        self.assertIn("[User] (777777)", User_1_str)
-        self.assertIn("'id': '777777'", User_1_str)
-        self.assertIn("'created_at': " + date_rep, User_1_str)
+        user_1 = User()
+        user_1.id = "777777"
+        user_1.created_at = User_1.updated_at = date_
+        user_1_str = user_1.__str__()
+        self.assertIn("[User] (777777)", user_1_str)
+        self.assertIn("'id': '777777'", user_1_str)
+        self.assertIn("'created_at': " + date_rep, user_1_str)
         self.assertIn("'updated_at': " + date_rep, User_1_str)
 
     def test_args_unuser_ed(self):
-        User_1 = User(None)
-        self.assertNotIn(None, User_1.__dict__.values())
+        user_1 = User(None)
+        self.assertNotIn(None, user_1.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
         date_ = datetime.today()
         date_iso = date_.isoformat()
-        User_1 = User(id="777", created_at=date_iso, updated_at=date_iso)
-        self.assertEqual(User_1.id, "777")
-        self.assertEqual(User_1.created_at, date_)
-        self.assertEqual(User_1.updated_at, date_)
+        user_1 = User(id="777", created_at=date_iso, updated_at=date_iso)
+        self.assertEqual(user_1.id, "777")
+        self.assertEqual(user_1.created_at, date_)
+        self.assertEqual(user_1.updated_at, date_)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
