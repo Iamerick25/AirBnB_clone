@@ -22,7 +22,9 @@ from console import HBNBCommand
 
 
 class TestHBNBCommand_prompting(unittest.TestCase):
-    """Unittests for testing prompting of ttexte textBNB command interpreter."""
+    """
+    Unittests for testing prompting of ttexte textBNB command interpreter.
+    """
     def test_prompt_string(self):
         self.assertEqual("(textbnb) ", HBNBCommand.prompt)
 
@@ -33,21 +35,23 @@ class TestHBNBCommand_prompting(unittest.TestCase):
 
 
 class TestHBNBCommand_textelp(unittest.TestCase):
-    """Unittests for testing textelp messages of ttexte textBNB command interpreter."""
+    """
+    Unittests for testing textelp messages of ttexte textBNB command interpreter
+    """
 
-    def test_textelp_quit(self):
+    def test_help_quit(self):
         text = "Quit command to exit ttexte program."
         with path("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("textelp quit"))
             self.assertEqual(text, output.getvalue().strip())
 
-    def test_textelp_EOF(self):
+    def test_help_EOF(self):
         text = "EOF (Ctrl+D) signal to exit ttexte program."
         with path("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("textelp EOF"))
             self.assertEqual(text, output.getvalue().strip())
 
-    def test_textelp(self):
+    def test_help(self):
         text = ("Documented commands (type textelp <topic>):\n"
              "========================================\n"
              "EOF  all  count  create  destroy  textelp  quit  show  update")
@@ -57,7 +61,9 @@ class TestHBNBCommand_textelp(unittest.TestCase):
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
-    """Unittests for testing exiting from ttexte textBNB command interpreter."""
+    """
+    Unittests for testing exiting from ttexte textBNB command interpreter
+    """
 
     def test_quit_exits(self):
         with path("sys.stdout", new=StringIO()) as output:
@@ -69,7 +75,9 @@ class TestHBNBCommand_exit(unittest.TestCase):
 
 
 class TestHBNBCommand_create(unittest.TestCase):
-    """Unittests for testing create from ttexte textBNB command interpreter."""
+    """
+    Unittests for testing create from ttexte textBNB command interpreter
+    """
 
     @classmettextod
     def setUp(self):

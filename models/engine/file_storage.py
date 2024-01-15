@@ -23,7 +23,7 @@ class FileStorage:
 
     def new(self, obj):
         """
-         Sets an object in the __objects dictionary with a key of 
+         Sets an object in the __objects dictionary with a key of
          <obj class name>.id.
         """
         obj_cls_name = obj.__class__.__name__
@@ -32,18 +32,16 @@ class FileStorage:
 
         FileStorage.__objects[key] = obj
 
-
     def all(self):
         """
-        Returns the __objects dictionary. 
+        Returns the __objects dictionary.
         It provides access to all the stored objects.
         """
-        return  FileStorage.__objects
-
+        return FileStorage.__objects
 
     def save(self):
         """
-        Serializes the __objects dictionary into 
+        Serializes the __objects dictionary into
         JSON format and saves it to the file specified by __file_path.
         """
         all_objs = FileStorage.__objects
